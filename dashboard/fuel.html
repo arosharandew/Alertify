@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoRythms Fuel Prices Dashboard</title>
+    <link rel="stylesheet" href="fuel-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="logo">Alertify <span class="logo-highlight">Fuel Prices</span></h1>
+                <p class="tagline">Real-time fuel price monitoring and historical trends</p>
+            </div>
+
+            <!-- Stats Display -->
+            <div class="weather-info">
+                <div class="weather-details">
+                    <div class="temperature">
+                        <i class="fas fa-gas-pump"></i>
+                        <span>Petrol 92:   <span id="latestPetrol95">--</span> LKR</span>
+                    </div>
+                    <div class="weather-condition">
+                        <i class="fas fa-truck"></i>
+                        <span>Auto Diesel: <span id="latestAutoDiesel">--</span> LKR</span>
+                    </div>
+                    <div class="weather-extra">
+                        <span><i class="fas fa-database"></i> <span id="dataPoints">--</span> records</span>
+                        <span><i class="fas fa-clock"></i> <span id="lastUpdate">--:--</span></span>
+                    </div>
+                </div>
+                <div class="weather-refresh">
+                    <button id="refreshData" aria-label="Refresh data" title="Refresh fuel data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Fuel Price Trends
+                </h2>
+                <div class="charts-grid">
+                    <!-- Row 1: Petrol Charts -->
+                    <div class="chart-row petrol-charts">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-gas-pump"></i> Petrol 95 Octane</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentPetrol95">--</strong></span>
+                                    <span>Change: <strong id="changePetrol95" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="petrol95Chart"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-gas-pump"></i> Petrol 92 Octane</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentPetrol92">--</strong></span>
+                                    <span>Change: <strong id="changePetrol92" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="petrol92Chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Diesel Charts -->
+                    <div class="chart-row diesel-charts">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-truck"></i> Auto Diesel</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentAutoDiesel">--</strong></span>
+                                    <span>Change: <strong id="changeAutoDiesel" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="autoDieselChart"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-truck-moving"></i> Super Diesel</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentSuperDiesel">--</strong></span>
+                                    <span>Change: <strong id="changeSuperDiesel" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="superDieselChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Kerosene Charts -->
+                    <div class="chart-row kerosene-charts">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-oil-can"></i> Kerosene</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentKerosene">--</strong></span>
+                                    <span>Change: <strong id="changeKerosene" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="keroseneChart"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-industry"></i> Industrial Kerosene</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentIndustrialKerosene">--</strong></span>
+                                    <span>Change: <strong id="changeIndustrialKerosene" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="industrialKeroseneChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Furnace Oil Charts -->
+                    <div class="chart-row furnace-charts">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-fire"></i> Furnace Oil 800</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentFurnace800">--</strong></span>
+                                    <span>Change: <strong id="changeFurnace800" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="furnace800Chart"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-fire-alt"></i> Furnace 1500 High</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentFurnace1500High">--</strong></span>
+                                    <span>Change: <strong id="changeFurnace1500High" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="furnace1500HighChart"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-temperature-low"></i> Furnace 1500 Low</h3>
+                                <div class="chart-stats">
+                                    <span>Current: <strong id="currentFurnace1500Low">--</strong></span>
+                                    <span>Change: <strong id="changeFurnace1500Low" class="change-neutral">--</strong></span>
+                                </div>
+                            </div>
+                            <canvas id="furnace1500LowChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table Section -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-table"></i>
+                        Fuel Price Data
+                    </h2>
+                    <div class="table-controls">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="tableSearch" placeholder="Search in table...">
+                        </div>
+                        <button id="applyDateRange" class="btn-primary">
+                            <i class="fas fa-filter"></i> Apply Filter
+                        </button>
+                        <button id="resetFilters" class="btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                        <button id="exportData" class="btn-secondary">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="fuelTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Petrol 95</th>
+                                <th>Petrol 92</th>
+                                <th>Auto Diesel</th>
+                                <th>Super Diesel</th>
+                                <th>Kerosene</th>
+                                <th>Industrial Kerosene</th>
+                                <th>Furnace 800</th>
+                                <th>Furnace 1500 High</th>
+                                <th>Furnace 1500 Low</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fuelTableBody">
+                            <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="pagination">
+                        <button id="prevPage" class="btn-pagination" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                        <button id="nextPage" class="btn-pagination" disabled>
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="rows-info">
+                        Showing <span id="rowsShown">0</span> of <span id="totalRows">0</span> rows
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 AlgoRythms Fuel Prices Dashboard. Real-time fuel price data for Sri Lanka.</p>
+                <p class="footer-status">
+                    <span id="connectionStatus"><i class="fas fa-circle" style="color: #4CAF50;"></i> Connected</span>
+                    <span class="separator">|</span>
+                    <span>Data Source: new_fuel.csv</span>
+                    <span class="separator">|</span>
+                    <span>Auto-refresh: <span id="footerRefreshCountdown">30</span>s</span>
+                </p>
+            </div>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Loading fuel price data...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="fuel-script.js"></script>
+</body>
+</html>
