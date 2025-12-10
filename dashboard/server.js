@@ -32,7 +32,6 @@ app.listen(PORT, () => {
     console.log(`CSV data available at http://localhost:${PORT}/alerts`);
 });
 // News CSV data route
-// News CSV data route
 app.get('/news-data', (req, res) => {
     const csvPath = path.join(__dirname, 'data', 'combined_newsdata.csv');
 
@@ -40,24 +39,16 @@ app.get('/news-data', (req, res) => {
     if (fs.existsSync(csvPath)) {
         try {
             const csvData = fs.readFileSync(csvPath, 'utf8');
-            const lines = csvData.trim().split('\n');
-            console.log(`Serving news CSV file with ${lines.length - 1} news items`);
-            console.log('Headers:', lines[0]);
-
-            // Log first few lines to debug
-            if (lines.length > 1) {
-                console.log('First news item:', lines[1]);
-            }
-
             res.setHeader('Content-Type', 'text/csv');
             res.send(csvData);
+            console.log('Serving news CSV file with', csvData.split('\n').length - 1, 'news items');
         } catch (error) {
             console.error('Error reading news CSV file:', error);
             res.status(500).send('Error reading news CSV file');
         }
     } else {
         console.log('News CSV file not found, serving sample news data');
-        // Sample news data with proper category column
+        // Sample news data structure
         const sampleNews = `empty`;
 
         res.setHeader('Content-Type', 'text/csv');
