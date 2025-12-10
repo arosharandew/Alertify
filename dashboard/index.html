@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoRythms News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="logo">Alertify <span class="logo-highlight">Dashboard</span></h1>
+                <p class="tagline">Real-time alerts and information</p>
+            </div>
+
+            <!-- Live Weather Display -->
+            <div class="weather-info" id="weatherInfo">
+                <div class="weather-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="city">Detecting location...</span>
+                </div>
+                <div class="weather-details">
+                    <div class="temperature">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span id="temp">--</span>°C
+                    </div>
+                    <div class="weather-condition">
+                        <i class="fas fa-cloud" id="weatherIcon"></i>
+                        <span id="weatherDesc">--</span>
+                    </div>
+                    <div class="weather-extra">
+                        <span><i class="fas fa-wind"></i> <span id="windSpeed">--</span> m/s</span>
+                        <span><i class="fas fa-tint"></i> <span id="humidity">--</span>%</span>
+                        <span><i class="fas fa-clock"></i> <span id="currentTime">--:--</span></span>
+                    </div>
+                </div>
+                <div class="weather-refresh">
+                    <button id="refreshWeather" aria-label="Refresh weather data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Alerts Wall Section -->
+        <section class="alerts-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bell"></i> Live Alerts</h2>
+                <div class="refresh-status">
+                    <span id="lastUpdated">Last updated: --:--</span>
+                </div>
+            </div>
+
+            <div class="alerts-container">
+                <div class="alerts-track" id="alertsTrack">
+                    <!-- Alert cards will be inserted here by JavaScript -->
+                    <div class="alert-placeholder">
+                        <div class="loading-spinner"></div>
+                        <p>Loading alerts...</p>
+                    </div>
+                </div>
+
+                <div class="alerts-controls">
+                    <button id="prevAlert" class="control-btn" aria-label="Previous alert">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="alerts-indicators" id="alertsIndicators">
+                        <!-- Indicators will be added by JavaScript -->
+                    </div>
+                    <button id="nextAlert" class="control-btn" aria-label="Next alert">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons Section -->
+        <section class="navigation-section">
+            <h2><i class="fas fa-compass"></i> Quick Navigation</h2>
+            <div class="nav-buttons">
+                <a href="news.html" class="nav-button news-btn">
+                    <div class="nav-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="nav-content">
+                        <h3>News Hub</h3>
+                        <p>Latest headlines and breaking news from trusted sources</p>
+                    </div>
+                    <div class="nav-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <a href="weather.html" class="nav-button weather-btn">
+                    <div class="nav-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="nav-content">
+                        <h3>Weather Center</h3>
+                        <p>Detailed forecasts, radar maps, and severe weather alerts</p>
+                    </div>
+                    <div class="nav-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <a href="fuel.html" class="nav-button fuel-btn">
+                    <div class="nav-icon">
+                        <i class="fas fa-gas-pump"></i>
+                    </div>
+                    <div class="nav-content">
+                        <h3>Fuel Tracker</h3>
+                        <p>Real-time fuel prices, station locations, and consumption analytics</p>
+                    </div>
+                    <div class="nav-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 AlgoRythms News. Real-time information dashboard.</p>
+                <p class="footer-status">
+                    <span id="connectionStatus"><i class="fas fa-circle" style="color: #4CAF50;"></i> Connected</span>
+                    <span class="separator">|</span>
+                    <span>Alerts: <span id="activeAlertsCount">0</span> active</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
