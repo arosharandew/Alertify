@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoRythms Weather Dashboard</title>
+    <link rel="stylesheet" href="weather-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="logo">Alertify <span class="logo-highlight">Weather</span></h1>
+                <p class="tagline">Real-time weather data and forecasts for Sri Lanka</p>
+            </div>
+
+            <!-- Current Weather Display -->
+            <div class="weather-info" id="weatherInfo">
+                <div class="weather-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="currentLocation">Select a location</span>
+                </div>
+                <div class="weather-details">
+                    <div class="temperature">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span id="currentTemp">--</span>°C
+                    </div>
+                    <div class="weather-condition">
+                        <i class="fas fa-cloud" id="weatherIcon"></i>
+                        <span id="currentWeatherDesc">Select location to view</span>
+                    </div>
+                    <div class="weather-extra">
+                        <span><i class="fas fa-wind"></i> <span id="currentWind">--</span> m/s</span>
+                        <span><i class="fas fa-tint"></i> <span id="currentHumidity">--</span>%</span>
+                        <span><i class="fas fa-clock"></i> <span id="currentTime">--:--</span></span>
+                    </div>
+                </div>
+                <div class="weather-refresh">
+                    <button id="refreshWeather" aria-label="Refresh weather data" title="Refresh weather data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Weather Controls -->
+        <section class="weather-controls">
+            <div class="search-filter">
+                <div class="location-filter">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select id="locationSelect">
+                        <option value="">Select a location...</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="stats-info">
+                    <div class="stat-item">
+                        <i class="fas fa-database"></i>
+                        <span>Locations: <span id="dataCount">0</span></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Last Update: <span id="lastUpdate">--:--</span></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Weather Details Cards -->
+            <div class="details-section">
+                <h2 class="section-title">Weather Details</h2>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Temperature</h3>
+                            <p class="detail-value" id="detailTemp">--°C</p>
+                            <p class="detail-label">Feels like <span id="detailFeelsLike">--°C</span></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Humidity</h3>
+                            <p class="detail-value" id="detailHumidity">--%</p>
+                            <p class="detail-label">Rain: <span id="detailRain">-- mm</span></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Wind</h3>
+                            <p class="detail-value" id="detailWind">-- m/s</p>
+                            <p class="detail-label">Condition: <span id="detailCondition">--</span></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Alerts</h3>
+                            <p class="detail-value" id="detailAlerts">None</p>
+                            <p class="detail-label">Forecast periods: <span id="detailForecast">--</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <h2 class="section-title">Historical Trends</h2>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3><i class="fas fa-tint"></i> Humidity</h3>
+                        <canvas id="humidityChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3><i class="fas fa-temperature-high"></i> Temperature</h3>
+                        <canvas id="temperatureChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3><i class="fas fa-wind"></i> Wind Speed</h3>
+                        <canvas id="windChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forecast Table -->
+            <div class="forecast-section">
+                <h2 class="section-title">Hourly Forecast</h2>
+                <div class="forecast-container">
+                    <div class="forecast-scroll" id="forecastScroll">
+                        <!-- Forecast cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-section">
+                <h2 class="section-title">All Locations Data</h2>
+                <div class="table-container">
+                    <table id="weatherTable">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Temperature</th>
+                                <th>Feels Like</th>
+                                <th>Humidity</th>
+                                <th>Condition</th>
+                                <th>Wind Speed</th>
+                                <th>Rain</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weatherTableBody">
+                            <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 AlgoRythms Weather Dashboard. Real-time weather data from weather stations across Sri Lanka.</p>
+                <p class="footer-status">
+                    <span id="connectionStatus"><i class="fas fa-circle" style="color: #4CAF50;"></i> Connected</span>
+                    <span class="separator">|</span>
+                    <span>Data Source: new_weather.csv</span>
+                    <span class="separator">|</span>
+                    <span>Auto-refresh: <span id="footerRefreshCountdown">30</span>s</span>
+                </p>
+            </div>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Loading weather data...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="weather-script.js"></script>
+</body>
+</html>
