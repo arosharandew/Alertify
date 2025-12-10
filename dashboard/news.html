@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoRythms News Hub</title>
+    <link rel="stylesheet" href="news-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="logo">Alertify <span class="logo-highlight">News Hub</span></h1>
+                <p class="tagline">Comprehensive news coverage across all categories</p>
+            </div>
+
+            <!-- Live Weather Display -->
+            <div class="weather-info" id="weatherInfo">
+                <div class="weather-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="city">Detecting location...</span>
+                </div>
+                <div class="weather-details">
+                    <div class="temperature">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span id="temp">--</span>°C
+                    </div>
+                    <div class="weather-condition">
+                        <i class="fas fa-cloud" id="weatherIcon"></i>
+                        <span id="weatherDesc">Getting weather data...</span>
+                    </div>
+                    <div class="weather-extra">
+                        <span><i class="fas fa-wind"></i> <span id="windSpeed">--</span> m/s</span>
+                        <span><i class="fas fa-tint"></i> <span id="humidity">--</span>%</span>
+                        <span><i class="fas fa-clock"></i> <span id="currentTime">--:--</span></span>
+                    </div>
+                </div>
+                <div class="weather-refresh">
+                    <button id="refreshWeather" aria-label="Refresh weather data" title="Refresh location and weather">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- News Controls -->
+        <section class="news-controls">
+            <div class="search-filter">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="newsSearch" placeholder="Search news headlines...">
+                    <button id="clearSearch" class="clear-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="category-filter">
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="traffic">Traffic</option>
+                        <option value="weather">Weather</option>
+                        <option value="safety">Safety</option>
+                        <option value="crime">Crime</option>
+                        <option value="government">Government</option>
+                        <option value="economy">Economy</option>
+                        <option value="health">Health</option>
+                        <option value="environment">Environment</option>
+                        <option value="social">Social</option>
+                        <option value="community">Community</option>
+                    </select>
+                    <button id="refreshNews" class="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Refresh News
+                    </button>
+                </div>
+            </div>
+            <div class="stats-info">
+                <div class="stat-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Total News: <span id="totalNewsCount">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Last Updated: <span id="newsLastUpdated">--:--</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-database"></i>
+                    <span>Categories: <span id="categoryCount">10</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Categories Container -->
+        <section class="news-categories">
+            <!-- Categories will be dynamically loaded here -->
+            <div class="loading-section">
+                <div class="loading-spinner"></div>
+                <p>Loading news categories...</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 AlgoRythms News Hub. Comprehensive news coverage powered by real-time data.</p>
+                <p class="footer-status">
+                    <span id="connectionStatus"><i class="fas fa-circle" style="color: #4CAF50;"></i> Connected</span>
+                    <span class="separator">|</span>
+                    <span>News Source: combined_newsdata.csv</span>
+                    <span class="separator">|</span>
+                    <span>Auto-refresh: <span id="refreshCountdown">120</span>s</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- News Modal for detailed view -->
+    <div class="news-modal" id="newsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta">
+                    <div class="modal-category" id="modalCategory"></div>
+                    <div class="modal-date" id="modalDate"></div>
+                </div>
+                <div class="modal-summary" id="modalSummary"></div>
+                <div class="modal-tags" id="modalTags"></div>
+                <div class="modal-extra">
+                    <div class="modal-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="modalLocation"></span>
+                    </div>
+                    <div class="modal-impact">
+                        <i class="fas fa-chart-line"></i>
+                        <span id="modalImpact"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="news-script.js"></script>
+</body>
+</html>
