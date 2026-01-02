@@ -2,7 +2,7 @@
 const CONFIG = {
     WEATHER_API_KEY: '72953b767da2b8b05a3871cdb2bd251d', // Replace with your OpenWeather API key
     WEATHER_API_URL: 'https://api.openweathermap.org/data/2.5/weather',
-    CSV_SERVER_URL: 'http://localhost:3000/alerts', // Change to your server endpoint
+    CSV_SERVER_URL: 'data/new_alerts.csv', // Change to your server endpoint
     REFRESH_INTERVAL: 120000, // 2 minutes in milliseconds
     ALERT_SLIDE_INTERVAL: 10000, // 10 seconds per alert
     WEATHER_REFRESH_INTERVAL: 120000 // 2 minutes

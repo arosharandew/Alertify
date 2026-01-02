@@ -2,7 +2,7 @@
 const CONFIG = {
     WEATHER_API_KEY: '72953b767da2b8b05a3871cdb2bd251d', // Same as in main script
     WEATHER_API_URL: 'https://api.openweathermap.org/data/2.5/weather',
-    NEWS_CSV_URL: 'http://localhost:3000/news-data', // New endpoint for news CSV
+    NEWS_CSV_URL: 'data/combined_newsdata.csv', // New endpoint for news CSV
     REFRESH_INTERVAL: 120000, // 2 minutes in milliseconds
     WEATHER_REFRESH_INTERVAL: 120000 // 2 minutes
 };
