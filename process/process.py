@@ -6,7 +6,7 @@ data_dir = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Pri
 weather_path = os.path.join(data_dir, "weather.csv")
 fuel_path = os.path.join(data_dir, "fuel_prices.csv")
 alerts_path = os.path.join(data_dir, "alerts.csv")
-output_dir = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\dashboard\data"
+output_dir = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\docs\data"
 
 # Create output directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)

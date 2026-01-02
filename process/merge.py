@@ -4,7 +4,7 @@ import os
 # Define file paths
 news_path = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\data\news.csv"
 tweets_path = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\data\tweets.csv"
-output_dir = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\dashboard\data"
+output_dir = r"C:\Users\Arosha IIT\OneDrive - Robert Gordon University\Desktop\Private\Hack\docs\data"
 output_path = os.path.join(output_dir, "combined_newsdata.csv")
 
 # Create output directory if it doesn't exist
